@@ -11,9 +11,9 @@ namespace APICL.Controllers
     public class TipoProductoController : ControllerBase
 
     {
-        private readonly ILogger<ClienteController> _logger;
+        private readonly ILogger<TipoProductoController> _logger;
         private readonly DbBolivarContext _dbBolivarContext;
-        public TipoProductoController(ILogger<ClienteController> logger, DbBolivarContext db)
+        public TipoProductoController(ILogger<TipoProductoController> logger, DbBolivarContext db)
         {
 
             _logger = logger;

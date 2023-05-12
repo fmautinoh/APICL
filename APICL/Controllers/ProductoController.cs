@@ -10,9 +10,9 @@ namespace APICL.Controllers
     [ApiController]
     public class ProductoController : ControllerBase
     {
-        private readonly ILogger<ClienteController> _logger;
+        private readonly ILogger<ProductoController> _logger;
         private readonly DbBolivarContext _dbBolivarContext;
-        public ProductoController(ILogger<ClienteController> logger, DbBolivarContext db)
+        public ProductoController(ILogger<ProductoController> logger, DbBolivarContext db)
         {
 
             _logger = logger;
