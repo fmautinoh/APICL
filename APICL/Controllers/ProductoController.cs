@@ -1,4 +1,5 @@
 ﻿using APICL.Modelos;
+using APICL.Modelos.created;
 using APICL.Modelos.Dto;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -35,7 +36,7 @@ namespace APICL.Controllers
         [ProducesResponseType(200)]//ok
         [ProducesResponseType(400)]//badreq
         [ProducesResponseType(404)]//no found
-        public ActionResult<ClienteDto> GetProdId(int idprod)
+        public ActionResult<ProductoDto> GetProdId(int idprod)
         {
             if (idprod == 0)
             {
@@ -51,10 +52,11 @@ namespace APICL.Controllers
         }
 
         [HttpPost]
+        [Route("GuardarProducto")]
         [ProducesResponseType(201)]//ok
         [ProducesResponseType(400)]//badreq
         [ProducesResponseType(500)]//Internal Error
-        public ActionResult<ProductoDto> CrearProducto([FromBody] ProductoDto prod)
+        public ActionResult<ProductoCreatedDto> CrearProducto([FromBody] ProductoCreatedDto prod)
         {
             if (!ModelState.IsValid)
             {
@@ -63,10 +65,6 @@ namespace APICL.Controllers
             if (prod == null)
             {
                 return BadRequest(prod);
-            }
-            if (prod.IdProd == 0)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError);
             }
             Producto prodmd = new()
             {
@@ -80,7 +78,8 @@ namespace APICL.Controllers
             return Ok(prodmd);
         }
 
-        [HttpPut("{idprod:int}")]
+        [HttpPut]
+        [Route("UpdateProducto/{idprod:int}")]
         [ProducesResponseType(400)]//badreq
         [ProducesResponseType(200)]//No content
         public IActionResult updateProd(int idprod, [FromBody] ProductoDto prod)
@@ -101,7 +100,8 @@ namespace APICL.Controllers
             return Ok(prodmd);
         }
 
-        [HttpDelete("{idprod:int}")]
+        [HttpDelete]
+        [Route("DeleteProducto/{idprod:int}")]
         [ProducesResponseType(200)]//No content
         [ProducesResponseType(204)]//a
         [ProducesResponseType(400)]//badreq

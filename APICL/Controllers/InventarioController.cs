@@ -68,10 +68,6 @@ namespace APICL.Controllers
             {
                 return BadRequest(inv);
             }
-            if (inv.IdProd == 0)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError);
-            }
             int estatus = 0;
             if (inv.StokPro>0)
             {

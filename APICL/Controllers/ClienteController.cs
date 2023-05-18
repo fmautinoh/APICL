@@ -1,4 +1,5 @@
 ﻿using APICL.Modelos;
+using APICL.Modelos.created;
 using APICL.Modelos.Dto;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
@@ -52,10 +53,11 @@ namespace APICL.Controllers
         }
         //-----------
         [HttpPost]
+        [Route("GuardarCliente")]
         [ProducesResponseType(201)]//ok
         [ProducesResponseType(400)]//badreq
         [ProducesResponseType(500)]//Internal Error
-        public ActionResult<ClienteDto> CrearCliente([FromBody]ClienteDto cliente)
+        public ActionResult<ClienteCreatedDto> CrearCliente([FromBody]ClienteCreatedDto cliente)
         {
             if (!ModelState.IsValid)
             {
@@ -64,10 +66,6 @@ namespace APICL.Controllers
             if(cliente == null)
             {
                 return BadRequest(cliente);
-            }
-            if(cliente.id_cli == 0)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError);
             }
             Cliente clientemd = new()
             {
@@ -85,7 +83,8 @@ namespace APICL.Controllers
             return Ok(clientemd);
         }
 
-        [HttpPut("{idcliente:int}")]
+        [HttpPut]
+        [Route("UpdateCliente/{idcliente:int}")]
         [ProducesResponseType(400)]//badreq
         [ProducesResponseType(200)]//No content
         public IActionResult updateCliente(int idcliente, [FromBody] ClienteDto clienteu)

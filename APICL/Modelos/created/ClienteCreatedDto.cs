@@ -2,18 +2,15 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace APICL.Modelos.Dto
+namespace APICL.Modelos.created
 {
-    public class ClienteDto
+    public class ClienteCreatedDto
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int id_cli { get; set; }
         [Required]
         [MaxLength(8)]
         public string? dni_cli { get; set; }
         [MaxLength(11)]
-        public string ruc_cli { get; set; }
+        public string? ruc_cli { get; set; }
         [Required]
         [MaxLength(50)]
         public string? nom_cli { get; set; }
